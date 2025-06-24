@@ -88,3 +88,19 @@ combo_t key_combos[] = {
   COMBO(thumbcombos_fun, KC_APP)
 };
 #endif
+
+// custom .c code
+enum custom_keycodes {
+  LABPWD = SAFE_RANGE
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LABPWD:
+      if (record->event.pressed) {
+        SEND_STRING("!Q@W3e4r%T^r");
+	return false;
+      }
+  }
+  return true;
+}
