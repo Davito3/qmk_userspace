@@ -7,14 +7,12 @@
 
 #define XXX KC_NO
 
-
 //#define ESC KC_ESC
 #define ESC QK_GESC
 #define TAB KC_TAB
 #define COL KC_SCLN
 #define CTL KC_LCTL
 #define ALT KC_LALT
-//MIRYOKU_NAV=VI
 
 //#define MIRYOKU_LAYERMAPPING_<layer> for per-layer mapping if needed
 #define MIRYOKU_MAPPING(\
@@ -24,7 +22,7 @@
      N30, N31, K32, K33, K34,                K35, K36, K37, N38, N39\
 )\
 LAYOUT(\
-ESC, KC_1,KC_2,KC_3,KC_4,KC_5,               KC_6,KC_7,KC_8,KC_9,KC_0,XXX,\
+ESC, KC_1,KC_2,KC_3,KC_4,KC_5,               KC_6,KC_7,KC_8,KC_9,KC_0,TD(U_TD_U_BASE),\
 TAB, K00, K01, K02, K03, K04,                K05, K06, K07, K08, K09, XXX,\
 CTL, K10, K11, K12, K13, K14,                K15, K16, K17, K18, K19, XXX,\
 ALT, K20, K21, K22, K23, K24, XXX,      XXX, K25, K26, K27, K28, K29, XXX,\
@@ -50,11 +48,11 @@ KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NA
 U_NA,              KC_ALGR,           TD(U_TD_U_SYM),    TD(U_TD_U_NUM),    U_NA,              KC_MINS,           KC_1,               KC_2,              KC_3,              KC_SLSH,           \
 U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_EQL,            KC_0,               KC_DOT,            U_NP,              U_NP
 
-// TODO: this will lock sym layer currently since no base return (unless go to num first)
+// Swapped opposite layer lock to base layer as an escape from symbol layer lock
 #define MIRYOKU_LAYER_SYM \
-U_NA,              KC_LCBR,           S(KC_LCBR),        KC_LPRN,           S(KC_COMM),        S(KC_DOT),         KC_RPRN,           S(KC_RCBR),         KC_RCBR,           U_NA,              \
+U_NA,              KC_LBRC,           KC_LCBR,           KC_LPRN,           KC_LT,             KC_GT,             KC_RPRN,           KC_RCBR,            KC_RBRC,           U_NA,              \
 KC_EXLM,           KC_AT,             KC_HASH,           KC_DLR,            KC_PERC,           KC_CIRC,           KC_AMPR,           KC_ASTR,            KC_LPRN,           KC_RPRN,           \
-KC_TILD,           U_NA,              U_NA,              U_NA,              KC_PIPE,           U_NA,              TD(U_TD_U_SYM),    TD(U_TD_U_NUM),     KC_ALGR,           U_NA,              \
+KC_TILD,           U_NA,              U_NA,              U_NA,              KC_PIPE,           KC_EQL,            TD(U_TD_U_SYM),    TD(U_TD_U_BASE),    KC_ALGR,           U_NA,              \
 U_NP,              U_NP,              KC_LPRN,           KC_RPRN,           KC_UNDS,           U_NA,              U_NA,              U_NA,               U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NAV \
@@ -83,13 +81,24 @@ U_NP,              U_NP,              KC_APP,            KC_ESC,            KC_E
 
 // info on customization: https://github.com/manna-harbour/miryoku/discussions/85
 
-// to add layer:
+// to add layer ex:
 // MIRYOKU_X(GAME,    "Game")
-// #define MIRYOKU_LAYERMAPPING_GAME MIRYOKU_MAPPING // for default
+// #define MIRYOKU_LAYERMAPPING_GAME MIRYOKU_MAPPING // for default, or add custom
 
 // to remove layer:
 // remove from above list
 // and add a #define U_FUN U_NUM
 // (for example) to remap all references to the Num layer instead (since layers are referenced from other layers)
 
+#define MIRYOKU_LAYER_LIST \
+MIRYOKU_X(BASE,   "Base") \
+MIRYOKU_X(EXTRA,  "Extra") \
+MIRYOKU_X(TAP,    "Tap") \
+MIRYOKU_X(BUTTON, "Button") \
+MIRYOKU_X(NAV,    "Nav") \
+MIRYOKU_X(MOUSE,  "Mouse") \
+MIRYOKU_X(MEDIA,  "Media") \
+MIRYOKU_X(NUM,    "Num") \
+MIRYOKU_X(SYM,    "Sym") \
+MIRYOKU_X(FUN,    "Fun")
 
