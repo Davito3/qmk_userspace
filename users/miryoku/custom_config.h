@@ -13,6 +13,7 @@
 #define COL KC_SCLN
 #define CTL KC_LCTL
 #define ALT KC_LALT
+#define MIRYOKU_CLIPBOARD_WIN
 
 //#define MIRYOKU_LAYERMAPPING_<layer> for per-layer mapping if needed
 #define MIRYOKU_MAPPING(\
@@ -24,7 +25,7 @@
 LAYOUT(\
 ESC, KC_1,KC_2,KC_3,KC_4,KC_5,               KC_6,KC_7,KC_8,KC_9,KC_0,TD(U_TD_U_BASE),\
 TAB, K00, K01, K02, K03, K04,                K05, K06, K07, K08, K09, XXX,\
-CTL, K10, K11, K12, K13, K14,                K15, K16, K17, K18, K19, XXX,\
+CTL, K10, K11, K12, K13, K14,                K15, K16, K17, K18, K19, COL,\
 ALT, K20, K21, K22, K23, K24, XXX,      XXX, K25, K26, K27, K28, K29, XXX,\
                     K32, K33, K34,      K35, K36, K37\
 )
@@ -54,7 +55,7 @@ U_NP,              U_NP,              U_NA,              U_NA,              U_NA
 #define MIRYOKU_LAYER_SYM \
 LABPWD,            KC_LBRC,           KC_LCBR,           KC_LPRN,           KC_LT,             KC_GT,             KC_RPRN,           KC_RCBR,            KC_RBRC,           U_NA,              \
 KC_EXLM,           KC_AT,             KC_HASH,           KC_DLR,            KC_PERC,           KC_CIRC,           KC_AMPR,           KC_ASTR,            KC_LPRN,           KC_RPRN,           \
-KC_TILD,           U_NA,              U_NA,              U_NA,              KC_PIPE,           KC_EQL,            TD(U_TD_U_SYM),    TD(U_TD_U_BASE),    KC_ALGR,           U_NA,              \
+KC_TILD,           U_NA,              U_NA,              KC_MINS,           KC_PIPE,           KC_EQL,            TD(U_TD_U_SYM),    TD(U_TD_U_BASE),    KC_ALGR,           U_NA,              \
 U_NP,              U_NP,              KC_LPRN,           KC_RPRN,           KC_UNDS,           U_NA,              U_NA,              U_NA,               U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NAV \
@@ -107,6 +108,12 @@ KC_A,              KC_S,              KC_D,              KC_F,              KC_G
 KC_Z,              KC_X,              KC_C,              KC_V,              KC_B,              KC_N,              KC_M,              KC_COMM,           KC_DOT,            KC_SLSH,           \
 U_NP,              U_NP,              KC_TAB,            KC_BSPC,            KC_ENT,            KC_SPC,            KC_DEL,           KC_ESC,            U_NP,              U_NP
 //U_NP,              U_NP,              KC_TAB,            KC_ESC,            KC_ENT,            KC_SPC,            KC_BSPC,           KC_DEL,            U_NP,              U_NP
+
+#define MIRYOKU_LAYER_BUTTON \
+U_UND,             U_CUT,             U_CPY,             U_PST,             U_RDO,             U_RDO,             U_PST,             U_CPY,             U_CUT,             U_UND,             \
+KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           KC_DEL,            U_NU,              KC_LSFT,           KC_LCTL,           KC_LALT,           KC_LGUI,           \
+U_UND,             U_CUT,             U_CPY,             U_PST,             U_RDO,             U_RDO,             U_PST,             U_CPY,             U_CUT,             U_UND,             \
+U_NP,              U_NP,              KC_BTN3,           KC_BTN1,           KC_BTN2,           KC_BTN2,           KC_BTN1,           KC_BTN3,           U_NP,              U_NP
 
 // info on customization: https://github.com/manna-harbour/miryoku/discussions/85
 
