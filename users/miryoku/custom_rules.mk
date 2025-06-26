@@ -1,5 +1,6 @@
 # Copyright 2019 Manna Harbour
 # https://github.com/manna-harbour/miryoku
 
-#define CHORDAL_HOLD
+COMBO_ENABLE = yes
+DYNAMIC_TAPPING_TERM_ENABLE = yes 
 

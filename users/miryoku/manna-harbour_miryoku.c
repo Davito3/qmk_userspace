@@ -9,19 +9,36 @@
 
 // custom .c code
 enum custom_keycodes {
-  LABPWD = SAFE_RANGE
+  LABPWD = SAFE_RANGE,
+  LTOSM
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LABPWD:
       if (record->event.pressed) {
-        SEND_STRING("!Q@W3e4r%T^r");
+        SEND_STRING("!Q@W3e4r%T^Y");
 	return false;
       }
+      break;
+    case LT(U_MOUSE,LTOSM):
+      if (record->event.pressed) {
+	set_oneshot_mods(MOD_LSFT);
+      }
+      return false;
+      break;
   }
   return true;
 }
+
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
+  LAYOUT(
+  'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L', '*',   '*', 'R', 'R', 'R', 'R', 'R', 'R',
+                      '*', '*', '*',   '*', '*', '*'
+  );
 
 // Additional Features double tap guard
 
@@ -104,3 +121,8 @@ combo_t key_combos[] = {
 };
 #endif
 
+// custom combos
+const uint16_t PROGMEM caps_word_combo[] = {KC_G, KC_M, COMBO_END};
+combo_t key_combos[] = {
+  COMBO(caps_word_combo, CW_TOGG),
+};
