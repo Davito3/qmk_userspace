@@ -14,21 +14,30 @@ enum custom_keycodes {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  uint8_t osmMods = get_oneshot_mods();
   switch (keycode) {
     case LABPWD:
       if (record->event.pressed) {
         SEND_STRING("!Q@W3e4r%T^Y");
 	return false;
       }
-      break;
-    case LT(U_MOUSE,LTOSM):
-      if (record->event.pressed) {
-	set_oneshot_mods(MOD_LSFT);
+    case LT(U_MOUSE, LTOSM):
+      if (record->event.pressed && record->tap.count) {
+	if (osmMods & MOD_MASK_SHIFT) {
+          clear_oneshot_mods();
+	} else {
+	  set_oneshot_mods(MOD_LSFT);
+	}
+//        if (record->tap.count >= 2) {
+//          clear_oneshot_mods();
+//	  } else if (record->tap.count > 0) { 
+//	    set_oneshot_mods(MOD_LSFT);
+//        }
+        return false;
       }
-      return false;
-      break;
+    default:
+      return true;
   }
-  return true;
 }
 
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
