@@ -43,14 +43,12 @@ KC_Q,              KC_W,              KC_F,              KC_P,              KC_B
 LGUI_T(KC_A),      LALT_T(KC_R),      LCTL_T(KC_S),      LSFT_T(KC_T),      KC_G,              KC_M,              LSFT_T(KC_N),       LCTL_T(KC_E),      LALT_T(KC_I),      LGUI_T(KC_O),      \
 LT(U_BUTTON,KC_Z), ALGR_T(KC_X),      KC_C,              KC_D,              KC_V,              KC_K,              KC_H,               KC_COMM,           ALGR_T(KC_DOT),    LT(U_BUTTON,KC_SLSH),\
 U_NP,              U_NP,              LT(U_MOUSE,LTOSM), LT(U_NAV,KC_BSPC), LT(U_NUM,KC_ENT),  LT(U_MEDIA,KC_SPC),LT(U_SYM,KC_DEL),   LT(U_FUN,KC_ESC),  U_NP,              U_NP
-//U_NP,              U_NP,              LT(U_MOUSE,KC_TAB),LT(U_NAV,KC_BSPC),  LT(U_NUM,KC_ENT),  LT(U_SYM,KC_SPC),  LT(U_MEDIA,KC_DEL),LT(U_FUN,KC_ESC),  U_NP,              U_NP
 
 #define MIRYOKU_LAYER_EXTRA \
 KC_Q,              KC_W,              KC_E,              KC_R,              KC_T,              KC_Y,              KC_U,               KC_I,              KC_O,              KC_P,              \
 LGUI_T(KC_A),      LALT_T(KC_S),      LCTL_T(KC_D),      LSFT_T(KC_F),      KC_G,              KC_H,              LSFT_T(KC_J),       LCTL_T(KC_K),      LALT_T(KC_L),      LGUI_T(KC_QUOT),   \
 LT(U_BUTTON,KC_Z), ALGR_T(KC_X),      KC_C,              KC_V,              KC_B,              KC_N,              KC_M,               KC_COMM,           ALGR_T(KC_DOT),    LT(U_BUTTON,KC_SLSH),\
-U_NP,              U_NP,              LT(U_MOUSE,LTOSM), LT(U_NAV,KC_BSPC), LT(U_NUM,KC_ENT),  LT(U_MEDIA,KC_SPC),LT(U_SYM,KC_DEL), LT(U_FUN,KC_ESC),  U_NP,              U_NP
-// U_NP,              U_NP,              LT(U_MOUSE,KC_TAB),LT(U_NAV,KC_BSPC),  LT(U_NUM,KC_ENT),  LT(U_SYM,KC_SPC),  LT(U_MEDIA,KC_DEL),LT(U_FUN,KC_ESC),  U_NP,              U_NP
+U_NP,              U_NP,              LT(U_MOUSE,LTOSM), LT(U_NAV,KC_BSPC), LT(U_NUM,KC_ENT),  LT(U_MEDIA,KC_SPC),LT(U_SYM,KC_DEL),   LT(U_FUN,KC_ESC),  U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NUM \
 TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              KC_ASTR,           KC_7,               KC_8,              KC_9,              U_NA,              \
@@ -60,9 +58,9 @@ U_NP,              U_NP,              U_NA,              U_NA,              U_NA
 
 #define MIRYOKU_LAYER_SYM \
 LABPWD,            KC_LBRC,           KC_LCBR,           KC_LPRN,           KC_LT,             KC_GT,             KC_RPRN,           KC_RCBR,            KC_RBRC,           U_NA,              \
-KC_EXLM,           KC_AT,             KC_HASH,           KC_DLR,            KC_PERC,           KC_CIRC,           KC_AMPR,           KC_ASTR,            KC_LPRN,           KC_RPRN,           \
+KC_EXLM,           KC_AT,             KC_HASH,           KC_DLR,            KC_PERC,           KC_CIRC,           KC_AMPR,           KC_ASTR,            KC_SCLN,           KC_COLN,           \
 KC_TILD,           KC_LT,             KC_GT,             KC_EQL,            KC_PIPE,           U_NA,              TD(U_TD_U_SYM),    TD(U_TD_U_NAV),     KC_ALGR,           KC_BSLS,           \
-U_NP,              U_NP,              KC_LPRN,           KC_MINS,           KC_UNDS,           U_NA,              U_NA,              U_NA,               U_NP,              U_NP
+U_NP,              U_NP,              KC_LSFT,           KC_MINS,           KC_UNDS,           U_NA,              U_NA,              U_NA,               U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NAV \
 TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              U_RDO,             U_PST,             U_CPY,             U_CUT,             U_UND,             \
@@ -85,7 +83,7 @@ KC_MPRV,           KC_VOLD,           KC_VOLU,           KC_MNXT,           U_NU
 U_NU,              U_NU,              U_NU,              U_NU,              OU_AUTO,           U_NA,              TD(U_TD_U_MEDIA),  TD(U_TD_U_NUM),    KC_ALGR,           U_NA,              \
 U_NP,              U_NP,              KC_MUTE,           KC_MPLY,           KC_MSTP,           U_NA,              U_NA,              U_NA,              U_NP,              U_NP
 
-// Vim motions 
+// Vim motions mouse
 /*
 #define MIRYOKU_LAYER_MOUSE \
 TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              U_RDO,             U_PST,             U_CPY,             U_CUT,             U_UND,             \
@@ -140,3 +138,5 @@ MIRYOKU_X(MEDIA,  "Media") \
 MIRYOKU_X(NUM,    "Num") \
 MIRYOKU_X(SYM,    "Sym") \
 MIRYOKU_X(FUN,    "Fun")
+
+

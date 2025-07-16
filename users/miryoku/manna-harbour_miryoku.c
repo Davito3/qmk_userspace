@@ -13,6 +13,7 @@ enum custom_keycodes {
   LTOSM
 };
 
+// TODO: maybe have custom disables for same-handed super-key for accidental win+lock/win+run/etc. ?
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uint8_t osmMods = get_oneshot_mods();
   switch (keycode) {
@@ -28,11 +29,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	} else {
 	  set_oneshot_mods(MOD_LSFT);
 	}
-//        if (record->tap.count >= 2) {
-//          clear_oneshot_mods();
-//	  } else if (record->tap.count > 0) { 
-//	    set_oneshot_mods(MOD_LSFT);
-//        }
         return false;
       }
     default:
@@ -40,6 +36,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+// Defining handedness for chordal-hold and making thumb cluster work for both hands
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
   LAYOUT(
   'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
