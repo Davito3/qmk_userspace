@@ -132,3 +132,4 @@ const uint16_t PROGMEM caps_word_combo[] = {KC_G, KC_M, COMBO_END};
 combo_t key_combos[] = {
   COMBO(caps_word_combo, CW_TOGG),
 };
+

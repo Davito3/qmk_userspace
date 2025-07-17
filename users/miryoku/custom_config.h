@@ -51,10 +51,10 @@ LT(U_BUTTON,KC_Z), ALGR_T(KC_X),      KC_C,              KC_V,              KC_B
 U_NP,              U_NP,              LT(U_MOUSE,LTOSM), LT(U_NAV,KC_BSPC), LT(U_NUM,KC_ENT),  LT(U_MEDIA,KC_SPC),LT(U_SYM,KC_DEL),   LT(U_FUN,KC_ESC),  U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NUM \
-TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              KC_ASTR,           KC_7,               KC_8,              KC_9,              U_NA,              \
+TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              KC_ASTR,           KC_7,               KC_8,              KC_9,              KC_EQL,            \
 KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NA,              KC_PPLS,           KC_4,               KC_5,              KC_6,              KC_SCLN,           \
 U_NA,              KC_ALGR,           TD(U_TD_U_MEDIA),  TD(U_TD_U_NUM),    U_NA,              KC_MINS,           KC_1,               KC_2,              KC_3,              KC_SLSH,           \
-U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_EQL,            KC_0,               KC_DOT,            U_NP,              U_NP
+U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_SPC,            KC_0,               KC_DOT,            U_NP,              U_NP
 
 #define MIRYOKU_LAYER_SYM \
 LABPWD,            KC_LBRC,           KC_LCBR,           KC_LPRN,           KC_LT,             KC_GT,             KC_RPRN,           KC_RCBR,            KC_RBRC,           KC_PPLS,           \
