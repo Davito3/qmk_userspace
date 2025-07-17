@@ -23,6 +23,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	return false;
       }
     case LT(U_MOUSE, LTOSM):
+      // if (record->tap.count == 2) {
+      //   layer change for double-tap hold?
+      //   normal shift for standard hold
+      //   OSM shift for single tap
+      // }
       if (record->event.pressed && record->tap.count) {
 	if (osmMods & MOD_MASK_SHIFT) {
           clear_oneshot_mods();

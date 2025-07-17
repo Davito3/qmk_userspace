@@ -52,7 +52,7 @@ U_NP,              U_NP,              LT(U_MOUSE,LTOSM), LT(U_NAV,KC_BSPC), LT(U
 
 #define MIRYOKU_LAYER_NUM \
 TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              KC_ASTR,           KC_7,               KC_8,              KC_9,              KC_EQL,            \
-KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NA,              KC_PPLS,           KC_4,               KC_5,              KC_6,              KC_SCLN,           \
+KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NA,              KC_PPLS,           KC_4,               KC_5,              KC_6,              KC_COLN,           \
 U_NA,              KC_ALGR,           TD(U_TD_U_MEDIA),  TD(U_TD_U_NUM),    U_NA,              KC_MINS,           KC_1,               KC_2,              KC_3,              KC_SLSH,           \
 U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_SPC,            KC_0,               KC_DOT,            U_NP,              U_NP
 
@@ -64,9 +64,9 @@ U_NP,              U_NP,              KC_LSFT,           KC_MINS,           KC_U
 
 #define MIRYOKU_LAYER_NAV \
 TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              U_RDO,             U_PST,             U_CPY,             U_CUT,             U_UND,             \
-KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NA,              KC_LEFT,           KC_DOWN,           KC_UP,             KC_RGHT,           CW_TOGG,           \
+KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NA,              KC_LEFT,           KC_DOWN,           KC_UP,             KC_RGHT,           KC_COLN,           \
 U_NA,              KC_ALGR,           TD(U_TD_U_SYM),    TD(U_TD_U_NAV),    U_NA,              KC_HOME,           KC_PGDN,           KC_PGUP,           KC_END,            KC_INS,            \
-U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_SPC,            KC_DEL,           KC_ESC,            U_NP,              U_NP
+U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_SPC,            KC_DEL,            KC_ESC,            U_NP,              U_NP
 
 // non-vi motion positions (home-row nav)
 /*
