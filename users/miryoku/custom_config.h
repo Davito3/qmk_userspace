@@ -9,6 +9,7 @@
 
 //#define ESC KC_ESC
 #define ESC QK_GESC
+#define QKR QK_REP
 #define TAB KC_TAB
 #define COL KC_SCLN
 #define CTL KC_LCTL
@@ -31,11 +32,14 @@
 )\
 LAYOUT(\
 ESC, KC_1,KC_2,KC_3,KC_4,KC_5,               KC_6,KC_7,KC_8,KC_9,KC_0,TD(U_TD_U_BASE),\
-TAB, K00, K01, K02, K03, K04,                K05, K06, K07, K08, K09, XXX,\
+TAB, K00, K01, K02, K03, K04,                K05, K06, K07, K08, K09, QKR,\
 CTL, K10, K11, K12, K13, K14,                K15, K16, K17, K18, K19, COL,\
-ALT, K20, K21, K22, K23, K24, DT_DOWN,DT_UP, K25, K26, K27, K28, K29, DT_PRNT,\
+ALT, K20, K21, K22, K23, K24, XXX,      XXX, K25, K26, K27, K28, K29, XXX,\
                     K32, K33, K34,      K35, K36, K37\
 )
+
+// ALT, K20, K21, K22, K23, K24, DT_DOWN,DT_UP, K25, K26, K27, K28, K29, DT_PRNT
+
 
 // Modified thumb keys. Sym layer overhaul
 #define MIRYOKU_LAYER_BASE \
@@ -108,7 +112,7 @@ U_NP,              U_NP,              KC_APP,            KC_BSPC,           KC_E
 KC_Q,              KC_W,              KC_E,              KC_R,              KC_T,              KC_Y,              KC_U,              KC_I,              KC_O,              KC_P,              \
 KC_A,              KC_S,              KC_D,              KC_F,              KC_G,              KC_H,              KC_J,              KC_K,              KC_L,              KC_QUOT,           \
 KC_Z,              KC_X,              KC_C,              KC_V,              KC_B,              KC_N,              KC_M,              KC_COMM,           KC_DOT,            KC_SLSH,           \
-U_NP,              U_NP,              KC_TAB,            KC_BSPC,           KC_ENT,            KC_SPC,            KC_DEL,           KC_ESC,            U_NP,              U_NP
+U_NP,              U_NP,              KC_TAB,            KC_BSPC,           KC_ENT,            KC_SPC,            KC_DEL,            KC_ESC,            U_NP,              U_NP
 
 #define MIRYOKU_LAYER_BUTTON \
 U_UND,             U_CUT,             U_CPY,             U_PST,             U_RDO,             U_RDO,             U_PST,             U_CPY,             U_CUT,             U_UND,             \

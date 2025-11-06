@@ -10,10 +10,12 @@
 // custom .c code
 enum custom_keycodes {
   LABPWD = SAFE_RANGE,
-  LTOSM
+  LTOSM,
+  CAPS
 };
 
 // TODO: maybe have custom disables for same-handed super-key for accidental win+lock/win+run/etc. ?
+//       also might consider per key tapping term for those? just need to not lock computer when typing a+l all the time
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uint8_t osmMods = get_oneshot_mods();
   switch (keycode) {
@@ -23,16 +25,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	return false;
       }
     case LT(U_MOUSE, LTOSM):
-      // if (record->tap.count == 2) {
-      //   layer change for double-tap hold?
-      //   normal shift for standard hold
-      //   OSM shift for single tap
-      // }
-      if (record->event.pressed && record->tap.count) {
-	if (osmMods & MOD_MASK_SHIFT) {
-          clear_oneshot_mods();
-	} else {
-	  set_oneshot_mods(MOD_LSFT);
+      if (record->event.pressed) {
+        if (record->tap.count == 1) {
+          if (osmMods & MOD_MASK_SHIFT) {
+            clear_oneshot_mods();
+          } else {
+            set_oneshot_mods(MOD_LSFT);
+          }
+          return false;
+        } else if (record->tap.count == 2) {
+          // layer change for double-tap hold?
+          // normal shift for standard hold
+          // OSM shift for single tap
+          // return false;
+        } else {
+          return true; // do normal layer change for tap-hold?
+        }
+      }
+    case CAPS:
+      if (record->event.pressed) {
+        if (record->tap.count == 1) {
+	  caps_word_toggle();
+	} else if (record->tap.count == 2) {
+	  tap_code(KC_CAPS);
 	}
         return false;
       }
@@ -94,11 +109,12 @@ MIRYOKU_LAYER_LIST
 
 // shift functions
 
-const key_override_t capsword_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
+// ***This doesn't seem to work? Also removed direct KC_CAPS key for now so not really even needed since I'm using custom combo
+// const key_override_t capsword_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
 
-const key_override_t *key_overrides[] = {
-    &capsword_key_override
-};
+// const key_override_t *key_overrides[] = {
+//     &capsword_key_override
+// };
 
 
 // thumb combos
@@ -135,6 +151,7 @@ combo_t key_combos[] = {
 // custom combos
 const uint16_t PROGMEM caps_word_combo[] = {KC_G, KC_M, COMBO_END};
 combo_t key_combos[] = {
-  COMBO(caps_word_combo, CW_TOGG),
+  // COMBO(caps_word_combo, CW_TOGG),
+  COMBO(caps_word_combo, CAPS),
 };
 

@@ -2,5 +2,6 @@
 # https://github.com/manna-harbour/miryoku
 
 COMBO_ENABLE = yes
-DYNAMIC_TAPPING_TERM_ENABLE = yes 
+REPEAT_KEY_ENABLE = yes
+//DYNAMIC_TAPPING_TERM_ENABLE = yes 
 
