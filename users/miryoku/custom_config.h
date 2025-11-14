@@ -64,7 +64,7 @@ U_NP,              U_NP,              U_NA,              U_NA,              U_NA
 LABPWD,            KC_LBRC,           KC_LCBR,           KC_LPRN,           KC_LT,             KC_GT,             KC_RPRN,           KC_RCBR,            KC_RBRC,           KC_PPLS,           \
 KC_EXLM,           KC_AT,             KC_HASH,           KC_DLR,            KC_PERC,           KC_CIRC,           KC_AMPR,           KC_ASTR,            KC_SCLN,           KC_COLN,           \
 KC_TILD,           KC_LT,             KC_GT,             KC_EQL,            KC_PIPE,           U_NA,              TD(U_TD_U_SYM),    TD(U_TD_U_NAV),     KC_ALGR,           KC_BSLS,           \
-U_NP,              U_NP,              KC_LSFT,           KC_MINS,           KC_UNDS,           U_NA,              U_NA,              U_NA,               U_NP,              U_NP
+U_NP,              U_NP,              KC_MINS,           KC_UNDS,           KC_ENT,            U_NA,              U_NA,              U_NA,               U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NAV \
 TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              U_RDO,             U_PST,             U_CPY,             U_CUT,             U_UND,             \
