@@ -53,8 +53,8 @@ bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
         // Keycodes that continue Caps Word, with shift applied.
         case KC_A ... KC_Z:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
         case KC_MINS:
-            // add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
             return true;
 
         // Keycodes that continue Caps Word, without shifting.
@@ -69,28 +69,6 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-// custom tap dance for caps loc/ caps toggle
-enum TAPDANCES {
-  TD_CAPSCOMBO,
-};
-
-// Custom logic for caps toggle/caps loc tap dance
-void dance_capscombo_finished(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    // TODO: check and disable caps_loc while in caps-word mode?
-    caps_word_toggle();
-  } else if (state->count == 2) {
-    tap_code(KC_CAPS);
- }
-}
-
-const uint16_t PROGMEM caps_word_combo[] = {KC_G, KC_M, COMBO_END};
-
-// Custom combo to trigger tap dance action
-combo_t key_combos[] = {
-  COMBO(caps_word_combo, TD(TD_CAPSCOMBO)),
-};
-
 
 // Defining handedness for chordal-hold and making thumb cluster work for both hands
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
@@ -103,13 +81,24 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
   );
 
 
-// Additional Features double tap guard
-enum {
+// Additional Features double tap guard and custom tap dances
+enum TAPDANCES {
+    TD_CAPSCOMBO,
     U_TD_BOOT,
 #define MIRYOKU_X(LAYER, STRING) U_TD_U_##LAYER,
 MIRYOKU_LAYER_LIST
 #undef MIRYOKU_X
 };
+
+// Custom logic for caps toggle/caps loc tap dance
+void dance_capscombo_finished(tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    // TODO: check and disable caps_loc while in caps-word mode?
+    caps_word_toggle();
+  } else if (state->count == 2) {
+    tap_code(KC_CAPS);
+ }
+}
 
 void u_td_fn_boot(tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
@@ -125,6 +114,7 @@ void u_td_fn_U_##LAYER(tap_dance_state_t *state, void *user_data) { \
 }
 MIRYOKU_LAYER_LIST
 #undef MIRYOKU_X
+
 
 tap_dance_action_t tap_dance_actions[] = {
     [U_TD_BOOT] = ACTION_TAP_DANCE_FN(u_td_fn_boot),
@@ -181,4 +171,12 @@ combo_t key_combos[] = {
   COMBO(thumbcombos_fun, KC_APP)
 };
 #endif
+
+
+const uint16_t PROGMEM caps_word_combo[] = {KC_G, KC_M, COMBO_END};
+
+// Custom combo to trigger tap dance action
+combo_t key_combos[] = {
+  COMBO(caps_word_combo, TD(TD_CAPSCOMBO)),
+};
 
