@@ -42,19 +42,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return true; // do normal layer change for tap-hold?
         }
       }
-    case CAPS:
-      if (record->event.pressed) {
-        if (record->tap.count == 1) {
-	  caps_word_toggle();
-	} else if (record->tap.count == 2) {
-	  tap_code(KC_CAPS);
-	}
-        return false;
-      }
-    default:
-      return true;
+
+     default:
+       return true;
   }
 }
+
+// custom tap dance for caps loc/ caps toggle
+enum TAPDANCES {
+  TD_CAPSCOMBO,
+};
+
+// Custom logic for caps toggle/caps loc tap dance
+void dance_capscombo_finished(tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    caps_word_toggle();
+  } else if (state->count == 2) {
+    tap_code(KC_CAPS);
+ }
+}
+
+const uint16_t PROGMEM caps_word_combo[] = {KC_G, KC_M, COMBO_END};
+
+// Custom combo to trigger tap dance action
+combo_t key_combos[] = {
+  COMBO(caps_word_combo, TD(TD_CAPSCOMBO)),
+};
+
 
 // Defining handedness for chordal-hold and making thumb cluster work for both hands
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
@@ -66,8 +80,8 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
                       '*', '*', '*',   '*', '*', '*'
   );
 
-// Additional Features double tap guard
 
+// Additional Features double tap guard
 enum {
     U_TD_BOOT,
 #define MIRYOKU_X(LAYER, STRING) U_TD_U_##LAYER,
@@ -95,11 +109,11 @@ tap_dance_action_t tap_dance_actions[] = {
 #define MIRYOKU_X(LAYER, STRING) [U_TD_U_##LAYER] = ACTION_TAP_DANCE_FN(u_td_fn_U_##LAYER),
 MIRYOKU_LAYER_LIST
 #undef MIRYOKU_X
+    [TD_CAPSCOMBO] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_capscombo_finished, NULL),
 };
 
 
 // keymap
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MIRYOKU_X(LAYER, STRING) [U_##LAYER] = U_MACRO_VA_ARGS(MIRYOKU_LAYERMAPPING_##LAYER, MIRYOKU_LAYER_##LAYER),
 MIRYOKU_LAYER_LIST
@@ -108,7 +122,6 @@ MIRYOKU_LAYER_LIST
 
 
 // shift functions
-
 // ***This doesn't seem to work? Also removed direct KC_CAPS key for now so not really even needed since I'm using custom combo
 // const key_override_t capsword_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
 
@@ -118,7 +131,6 @@ MIRYOKU_LAYER_LIST
 
 
 // thumb combos
-
 #if defined (MIRYOKU_KLUDGE_THUMBCOMBOS)
 const uint16_t PROGMEM thumbcombos_base_right[] = {LT(U_SYM, KC_ENT), LT(U_NUM, KC_BSPC), COMBO_END};
 const uint16_t PROGMEM thumbcombos_base_left[] = {LT(U_NAV, KC_SPC), LT(U_MOUSE, KC_TAB), COMBO_END};
@@ -147,11 +159,4 @@ combo_t key_combos[] = {
   COMBO(thumbcombos_fun, KC_APP)
 };
 #endif
-
-// custom combos
-const uint16_t PROGMEM caps_word_combo[] = {KC_G, KC_M, COMBO_END};
-combo_t key_combos[] = {
-  // COMBO(caps_word_combo, CW_TOGG),
-  COMBO(caps_word_combo, CAPS),
-};
 
