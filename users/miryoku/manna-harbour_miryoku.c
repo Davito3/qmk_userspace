@@ -90,14 +90,26 @@ MIRYOKU_LAYER_LIST
 #undef MIRYOKU_X
 };
 
-// Custom logic for caps toggle/caps loc tap dance
+// Custom logic for caps word/caps loc tap dance
 void dance_capscombo_finished(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    // TODO: check and disable caps_loc while in caps-word mode?
+  bool caps = host_keyboard_led_state().caps_lock;
+
+  if (state->count == 1) {        // caps_word for single click
+    if (caps) {
+      tap_code(KC_CAPS);
+    }
     caps_word_toggle();
-  } else if (state->count == 2) {
+  } else if (state->count == 2) { // normal caps word for double click
+    // caps_word_off(); // Make sure caps_word is off before calling caps loc? Or do I want that feature
     tap_code(KC_CAPS);
- }
+  } else if (state->count >= 3) {  // turn everything off if spamming the combo
+    if (caps) {
+      tap_code(KC_CAPS);
+    }
+    caps_word_off();
+  } else if (state->count == 0) { // TODO: testing
+    SEND_STRING("zerocounttapdance");
+  }
 }
 
 void u_td_fn_boot(tap_dance_state_t *state, void *user_data) {
