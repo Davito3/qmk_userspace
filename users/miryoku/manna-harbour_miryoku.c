@@ -9,43 +9,43 @@
 
 // custom .c code
 enum custom_keycodes {
-  LABPWD = SAFE_RANGE,
-  LTOSM,
-  CAPS
+    LABPWD = SAFE_RANGE,
+    LTOSM,
+    CAPS
 };
 
 // TODO: maybe have custom disables for same-handed super-key for accidental win+lock/win+run/etc. ?
 //       also might consider per key tapping term for those? just need to not lock computer when typing a+l all the time
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  uint8_t osmMods = get_oneshot_mods();
-  switch (keycode) {
-    case LABPWD:
-      if (record->event.pressed) {
-        SEND_STRING("!Q@W3e4r%T^Y");
-	return false;
-      }
-    case LT(U_MOUSE, LTOSM):
-      if (record->event.pressed) {
-        if (record->tap.count == 1) {
-          if (osmMods & MOD_MASK_SHIFT) {
-            clear_oneshot_mods();
-          } else {
-            set_oneshot_mods(MOD_LSFT);
-          }
-          return false;
-        } else if (record->tap.count == 2) {
-          // layer change for double-tap hold?
-          // normal shift for standard hold
-          // OSM shift for single tap
-          // return false;
-        } else {
-          return true; // do normal layer change for tap-hold?
-        }
-      }
+    uint8_t osmMods = get_oneshot_mods();
+    switch (keycode) {
+        case LABPWD:
+            if (record->event.pressed) {
+                SEND_STRING("!Q@W3e4r%T^Y");
+                return false;
+            }
+        case LT(U_MOUSE, LTOSM):
+            if (record->event.pressed) {
+                if (record->tap.count == 1) {
+                    if (osmMods & MOD_MASK_SHIFT) {
+                        clear_oneshot_mods();
+                    } else {
+                        set_oneshot_mods(MOD_LSFT);
+                    }
+                    return false;
+                } else if (record->tap.count == 2) {
+                    // layer change for double-tap hold?
+                    // normal shift for standard hold
+                    // OSM shift for single tap
+                    // return false;
+                } else {
+                    return true; // do normal layer change for tap-hold?
+                }
+            }
 
-     default:
-       return true;
-  }
+        default:
+            return true;
+    }
 }
 
 // caps word callback without auto-shifting the hyphen key
@@ -72,64 +72,65 @@ bool caps_word_press_user(uint16_t keycode) {
 
 // Defining handedness for chordal-hold and making thumb cluster work for both hands
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
-  LAYOUT(
-  'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
-  'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
-  'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
-  'L', 'L', 'L', 'L', 'L', 'L', '*',   '*', 'R', 'R', 'R', 'R', 'R', 'R',
-                      '*', '*', '*',   '*', '*', '*'
-  );
+    LAYOUT(
+        'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L', '*',   '*', 'R', 'R', 'R', 'R', 'R', 'R',
+        '*', '*', '*',   '*', '*', '*'
+    );
 
 
 // Additional Features double tap guard and custom tap dances
 enum TAPDANCES {
     TD_CAPSCOMBO,
     U_TD_BOOT,
-#define MIRYOKU_X(LAYER, STRING) U_TD_U_##LAYER,
-MIRYOKU_LAYER_LIST
-#undef MIRYOKU_X
+    #define MIRYOKU_X(LAYER, STRING) U_TD_U_##LAYER,
+    MIRYOKU_LAYER_LIST
+    #undef MIRYOKU_X
 };
 
 // Custom logic for caps word/caps loc tap dance
 void dance_capscombo_finished(tap_dance_state_t *state, void *user_data) {
-  bool caps = host_keyboard_led_state().caps_lock;
+    bool caps = host_keyboard_led_state().caps_lock;
 
-  if (state->count == 1) {        // caps_word for single click
-    if (caps) {
-      tap_code(KC_CAPS);
+    // TODO: I think 1 and 2 are backwards for checking caps state?
+    if (state->count == 1) {        // caps_word for single click
+        if (caps) {
+            tap_code(KC_CAPS);
+        }
+        caps_word_toggle();
+    } else if (state->count == 2) { // normal caps word for double click
+        // caps_word_off(); // Make sure caps_word is off before calling caps loc? Or do I want that feature
+        tap_code(KC_CAPS);
+    } else if (state->count >= 3) {  // turn everything off if spamming the combo
+        if (caps) {
+            tap_code(KC_CAPS);
+        }
+        caps_word_off();
+    } else if (state->count == 0) { // TODO: testing
+        SEND_STRING("zerocounttapdance");
     }
-    caps_word_toggle();
-  } else if (state->count == 2) { // normal caps word for double click
-    // caps_word_off(); // Make sure caps_word is off before calling caps loc? Or do I want that feature
-    tap_code(KC_CAPS);
-  } else if (state->count >= 3) {  // turn everything off if spamming the combo
-    if (caps) {
-      tap_code(KC_CAPS);
-    }
-    caps_word_off();
-  } else if (state->count == 0) { // TODO: testing
-    SEND_STRING("zerocounttapdance");
-  }
 }
 
 void u_td_fn_boot(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 2) {
-    reset_keyboard();
-  }
+    if (state->count == 2) {
+        reset_keyboard();
+    }
 }
 
 #define MIRYOKU_X(LAYER, STRING) \
 void u_td_fn_U_##LAYER(tap_dance_state_t *state, void *user_data) { \
-  if (state->count == 2) { \
-    default_layer_set((layer_state_t)1 << U_##LAYER); \
-  } \
+    if (state->count == 2) { \
+        default_layer_set((layer_state_t)1 << U_##LAYER); \
+    } \
 }
 MIRYOKU_LAYER_LIST
 #undef MIRYOKU_X
 
 
 tap_dance_action_t tap_dance_actions[] = {
-    [U_TD_BOOT] = ACTION_TAP_DANCE_FN(u_td_fn_boot),
+[U_TD_BOOT] = ACTION_TAP_DANCE_FN(u_td_fn_boot),
 #define MIRYOKU_X(LAYER, STRING) [U_TD_U_##LAYER] = ACTION_TAP_DANCE_FN(u_td_fn_U_##LAYER),
 MIRYOKU_LAYER_LIST
 #undef MIRYOKU_X
@@ -162,25 +163,25 @@ const uint16_t PROGMEM thumbcombos_nav[] = {KC_ENT, KC_BSPC, COMBO_END};
 const uint16_t PROGMEM thumbcombos_mouse[] = {KC_BTN2, KC_BTN1, COMBO_END};
 const uint16_t PROGMEM thumbcombos_media[] = {KC_MSTP, KC_MPLY, COMBO_END};
 const uint16_t PROGMEM thumbcombos_num[] = {KC_0, KC_MINS, COMBO_END};
-  #if defined (MIRYOKU_LAYERS_FLIP)
+#if defined (MIRYOKU_LAYERS_FLIP)
 const uint16_t PROGMEM thumbcombos_sym[] = {KC_UNDS, KC_LPRN, COMBO_END};
-  #else
+#else
 const uint16_t PROGMEM thumbcombos_sym[] = {KC_RPRN, KC_UNDS, COMBO_END};
-  #endif
+#endif
 const uint16_t PROGMEM thumbcombos_fun[] = {KC_SPC, KC_TAB, COMBO_END};
 combo_t key_combos[] = {
-  COMBO(thumbcombos_base_right, LT(U_FUN, KC_DEL)),
-  COMBO(thumbcombos_base_left, LT(U_MEDIA, KC_ESC)),
-  COMBO(thumbcombos_nav, KC_DEL),
-  COMBO(thumbcombos_mouse, KC_BTN3),
-  COMBO(thumbcombos_media, KC_MUTE),
-  COMBO(thumbcombos_num, KC_DOT),
-  #if defined (MIRYOKU_LAYERS_FLIP)
-  COMBO(thumbcombos_sym, KC_RPRN),
-  #else
-  COMBO(thumbcombos_sym, KC_LPRN),
-  #endif
-  COMBO(thumbcombos_fun, KC_APP)
+    COMBO(thumbcombos_base_right, LT(U_FUN, KC_DEL)),
+    COMBO(thumbcombos_base_left, LT(U_MEDIA, KC_ESC)),
+    COMBO(thumbcombos_nav, KC_DEL),
+    COMBO(thumbcombos_mouse, KC_BTN3),
+    COMBO(thumbcombos_media, KC_MUTE),
+    COMBO(thumbcombos_num, KC_DOT),
+#if defined (MIRYOKU_LAYERS_FLIP)
+    COMBO(thumbcombos_sym, KC_RPRN),
+    #else
+    COMBO(thumbcombos_sym, KC_LPRN),
+    #endif
+    COMBO(thumbcombos_fun, KC_APP)
 };
 #endif
 
@@ -189,6 +190,6 @@ const uint16_t PROGMEM caps_word_combo[] = {KC_G, KC_M, COMBO_END};
 
 // Custom combo to trigger tap dance action
 combo_t key_combos[] = {
-  COMBO(caps_word_combo, TD(TD_CAPSCOMBO)),
+    COMBO(caps_word_combo, TD(TD_CAPSCOMBO)),
 };
 
