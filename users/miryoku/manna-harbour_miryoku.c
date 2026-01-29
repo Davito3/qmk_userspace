@@ -60,8 +60,8 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_BSPC:
         case KC_DEL:
         case KC_UNDS:
-        // we don't want our combos to turn off caps word or dance_capscombo_finished will toggle it again (off+toggle=back on)
-        case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
+        // we don't want our td combo to turn off caps word or dance_capscombo_finished will toggle it again (off+toggle=back on)
+        case QK_TAP_DANCE ... QK_TAP_DANCE_MAX: // or QK_TAP_DANCE + TD_CAPSCOMBO enum value for precise targeting
             return true;
 
         default:
