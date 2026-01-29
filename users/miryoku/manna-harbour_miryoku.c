@@ -10,8 +10,7 @@
 // custom .c code
 enum custom_keycodes {
     LABPWD = SAFE_RANGE,
-    LTOSM,
-    CAPS
+    LTOSM
 };
 
 // TODO: maybe have custom disables for same-handed super-key for accidental win+lock/win+run/etc. ?
@@ -42,7 +41,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     return true; // do normal layer change for tap-hold?
                 }
             }
-
         default:
             return true;
     }
@@ -62,6 +60,8 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_BSPC:
         case KC_DEL:
         case KC_UNDS:
+        // we don't want our combos to turn off caps word or dance_capscombo_finished will toggle it again (off+toggle=back on)
+        case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
             return true;
 
         default:
@@ -94,22 +94,16 @@ enum TAPDANCES {
 void dance_capscombo_finished(tap_dance_state_t *state, void *user_data) {
     bool caps = host_keyboard_led_state().caps_lock;
 
-    // TODO: I think 1 and 2 are backwards for checking caps state?
     if (state->count == 1) {        // caps_word for single click
-        if (caps) {
-            tap_code(KC_CAPS);
-        }
         caps_word_toggle();
-    } else if (state->count == 2) { // normal caps word for double click
-        // caps_word_off(); // Make sure caps_word is off before calling caps loc? Or do I want that feature
+    } else if (state->count == 2) { // normal caps loc for double click
+        caps_word_off(); // Make sure caps_word is off when calling caps loc
         tap_code(KC_CAPS);
     } else if (state->count >= 3) {  // turn everything off if spamming the combo
-        if (caps) {
+        if (caps) { // NOTE: doesn't work when using mouse without borders since it grabs caps from the wrong machine
             tap_code(KC_CAPS);
         }
         caps_word_off();
-    } else if (state->count == 0) { // TODO: testing
-        SEND_STRING("zerocounttapdance");
     }
 }
 
@@ -134,7 +128,7 @@ tap_dance_action_t tap_dance_actions[] = {
 #define MIRYOKU_X(LAYER, STRING) [U_TD_U_##LAYER] = ACTION_TAP_DANCE_FN(u_td_fn_U_##LAYER),
 MIRYOKU_LAYER_LIST
 #undef MIRYOKU_X
-    [TD_CAPSCOMBO] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_capscombo_finished, NULL),
+[TD_CAPSCOMBO] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_capscombo_finished, NULL), //on tap, (on release if f() _WITH_RELEASE,) on finish, on reset
 };
 
 
