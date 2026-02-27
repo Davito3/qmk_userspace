@@ -57,14 +57,14 @@ U_NP,              U_NP,              LT(U_MOUSE,LTOSM), LT(U_NAV,KC_BSPC), LT(U
 
 #define MIRYOKU_LAYER_NUM \
 TD(U_TD_BOOT),     TD(U_TD_U_TAP),    TD(U_TD_U_EXTRA),  TD(U_TD_U_BASE),   U_NA,              KC_ASTR,           KC_7,               KC_8,              KC_9,              KC_EQL,            \
-KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NA,              KC_PPLS,           KC_4,               KC_5,              KC_6,              KC_COLN,           \
-U_NA,              KC_ALGR,           TD(U_TD_U_MEDIA),  TD(U_TD_U_NUM),    U_NA,              KC_MINS,           KC_1,               KC_2,              KC_3,              KC_SLSH,           \
+KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           U_NA,              KC_MINS,           KC_4,               KC_5,              KC_6,              KC_COLN,           \
+U_NA,              KC_ALGR,           TD(U_TD_U_MEDIA),  TD(U_TD_U_NUM),    U_NA,              KC_PPLS,           KC_1,               KC_2,              KC_3,              KC_SLSH,           \
 U_NP,              U_NP,              U_NA,              U_NA,              U_NA,              KC_SPC,            KC_0,               KC_DOT,            U_NP,              U_NP
 
 #define MIRYOKU_LAYER_SYM \
-LABPWD,            KC_LBRC,           KC_LCBR,           KC_LPRN,           KC_LT,             KC_GT,             KC_RPRN,           KC_RCBR,            KC_RBRC,           KC_PPLS,           \
+LABPWD,            KC_LBRC,           KC_LCBR,           KC_LPRN,           KC_LT,             KC_GT,             KC_RPRN,           KC_RCBR,            KC_RBRC,           KC_DQUO,           \
 KC_EXLM,           KC_AT,             KC_HASH,           KC_DLR,            KC_PERC,           KC_CIRC,           KC_AMPR,           KC_ASTR,            KC_SCLN,           KC_COLN,           \
-KC_TILD,           KC_LT,             KC_GT,             KC_EQL,            KC_PIPE,           U_NA,              TD(U_TD_U_SYM),    TD(U_TD_U_NAV),     KC_ALGR,           KC_BSLS,           \
+KC_TILD,           KC_LT,             KC_GT,             KC_EQL,            KC_PIPE,           KC_PPLS,           TD(U_TD_U_SYM),    TD(U_TD_U_NAV),     KC_ALGR,           KC_BSLS,           \
 U_NP,              U_NP,              KC_MINS,           KC_UNDS,           KC_ENT,            U_NA,              U_NA,              U_NA,               U_NP,              U_NP
 
 #define MIRYOKU_LAYER_NAV \
