@@ -77,7 +77,7 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
         'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
         'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
         'L', 'L', 'L', 'L', 'L', 'L', '*',   '*', 'R', 'R', 'R', 'R', 'R', 'R',
-        '*', '*', '*',   '*', '*', '*'
+                            '*', '*', '*',   '*', '*', '*'
     );
 
 
@@ -94,13 +94,13 @@ enum TAPDANCES {
 void dance_capscombo_finished(tap_dance_state_t *state, void *user_data) {
     bool caps = host_keyboard_led_state().caps_lock;
 
-    if (state->count == 1) {        // caps_word for single click
+    if (state->count == 1) {        // caps_word for single combo
         caps_word_toggle();
-    } else if (state->count == 2) { // normal caps loc for double click
-        caps_word_off(); // Make sure caps_word is off when calling caps loc
+    } else if (state->count == 2) { // normal caps loc for double combo
+        caps_word_off();            // Make sure caps_word is off when calling caps loc
         tap_code(KC_CAPS);
-    } else if (state->count >= 3) {  // turn everything off if spamming the combo
-        if (caps) { // NOTE: doesn't work when using mouse without borders since it grabs caps from the wrong machine
+    } else if (state->count >= 3) { // turn everything off if spamming the combo
+        if (caps) { // NOTE: doesn't work when using mouse without borders since it grabs caps status from the wrong machine
             tap_code(KC_CAPS);
         }
         caps_word_off();
